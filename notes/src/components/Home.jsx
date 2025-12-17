@@ -4,48 +4,42 @@ import { useSearchParams } from 'react-router-dom';
 import { addToPastes, updateToPastes } from '../redux/pasteSlice';
 import toast from 'react-hot-toast';
 
-
-
 const Home = () => {
   const dispatch = useDispatch();
-  const [title , setTitle] = useState('');
-  const [value , setValue] = useState('');
-  const [searchParams , setSearchParams] = useSearchParams();
-  const allpastes = useSelector((state) =>state.paste.pastes)
+  const [title, setTitle] = useState('');
+  const [value, setValue] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const allpastes = useSelector((state) => state.paste.pastes)
   const pasteId = searchParams.get("pasteId")
-  useEffect(() =>{
+  useEffect(() => {
     console.log("inside use effect")
-        if(pasteId){
-          const paste = allpastes.find((p) =>
-            p._id === pasteId
-          )
-          setTitle(paste.title);
-          setValue(paste.content);
-        }
-      },[pasteId])
-  
-  function createpaste(){
-    if(!title.trim() || !value.trim()){
+    if (pasteId) {
+      const paste = allpastes.find((p) =>
+        p._id === pasteId
+      )
+      setTitle(paste.title);
+      setValue(paste.content);
+    }
+  }, [pasteId])
+
+  function createpaste() {
+    if (!title.trim() || !value.trim()) {
       toast.error('Title and content cannot be empty');
       return;
     }
 
-    const paste ={
+    const paste = {
       title: title,
       content: value,
-      _id: pasteId ||  Date.now().toString(36),
+      _id: pasteId || Date.now().toString(36),
       createdAt: new Date().toISOString(),
     }
 
-   
-
-    if(pasteId){
+    if (pasteId) {
       // update
-
       dispatch(updateToPastes(paste))
       toast.success('Paste updated successfully');
-
-    }else{
+    } else {
       // create
       dispatch(addToPastes(paste))
       toast.success('Paste created successfully');
@@ -55,36 +49,59 @@ const Home = () => {
     setValue('');
     setSearchParams('');
   }
-  return (
-    <main className="max-w-4xl mx-auto p-8">
-      <div className="bg-white shadow-lg rounded-2xl p-8 space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center md:gap-4 gap-4">
-          <input
-            className="flex-1 w-full h-14 px-4 border-2 border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-500 text-base focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all"
-            type="text"
-            placeholder="Enter title here"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
 
-          <button
-            onClick={createpaste}
-            className="mt-2 md:mt-0 h-14 inline-flex items-center gap-2 bg-emerald-600 text-white px-8 rounded-xl text-base font-semibold shadow-md hover:bg-emerald-700 transition-colors"
-          >
-            {pasteId ? 'Update Paste' : 'Create Paste'}
-          </button>
+  return (
+    <main className="min-h-screen bg-neutral-950 flex flex-col items-center py-10 px-4 sm:px-6">
+      <div className="w-full max-w-6xl space-y-8">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            {pasteId ? 'Edit Paste' : 'Create Paste'}
+          </h1>
+          <p className="text-neutral-400">
+            Share your clean code snippets and text notes instantly.
+          </p>
         </div>
 
-        <div>
-          <textarea
-            value={value}
-            className="w-full min-h-96 p-5 border-2 border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-500 text-base leading-relaxed font-mono resize-none focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all"
-            placeholder="Enter content here"
-            onChange={(e) => {
-              setValue(e.target.value)
-            }}
-            rows={20}
-          ></textarea>
+        <div className="bg-neutral-900/50 backdrop-blur-sm border border-neutral-800 rounded-xl p-6 sm:p-8 shadow-2xl space-y-6">
+          <div className="grid grid-cols-1 gap-6">
+            <div className="space-y-2">
+              <label htmlFor="title" className="block text-sm font-medium text-neutral-300">
+                Title
+              </label>
+              <input
+                id="title"
+                className="w-full h-12 px-4 rounded-lg bg-neutral-800/50 border border-neutral-700 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all duration-200"
+                type="text"
+                placeholder="Ex: Authentication Middleware"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="content" className="block text-sm font-medium text-neutral-300">
+                Content
+              </label>
+              <textarea
+                id="content"
+                value={value}
+                className="w-full min-h-[500px] p-4 rounded-lg bg-neutral-800/50 border border-neutral-700 text-neutral-100 placeholder-neutral-500 font-mono text-sm leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all duration-200"
+                placeholder="// Write your code here..."
+                onChange={(e) => {
+                  setValue(e.target.value)
+                }}
+              ></textarea>
+            </div>
+
+            <div className="flex justify-end pt-2">
+              <button
+                onClick={createpaste}
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg shadow-lg shadow-blue-500/20 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0"
+              >
+                {pasteId ? 'Update Paste' : 'Create Paste'}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </main>
