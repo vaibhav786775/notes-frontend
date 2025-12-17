@@ -45,10 +45,10 @@ const ViewPaste = () => {
               <textarea
                 disabled
                 value={paste.content || ''}
-                className="w-full min-h-[500px] p-4 rounded-lg bg-neutral-950 border border-neutral-800 text-neutral-300 font-mono text-sm leading-relaxed resize-none opacity-90 focus:outline-none cursor-default"
+                className="w-full min-h-125 p-4 rounded-lg bg-neutral-950 border border-neutral-800 text-neutral-300 font-mono text-sm leading-relaxed resize-none opacity-90 focus:outline-none cursor-default"
                 rows={20}
               ></textarea>
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-950/20 pointer-events-none rounded-lg" />
+              <div className="absolute inset-0 bg-linear-to-b from-transparent to-neutral-950/20 pointer-events-none rounded-lg" />
             </div>
           </div>
         </div>

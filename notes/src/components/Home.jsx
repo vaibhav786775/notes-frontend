@@ -54,7 +54,7 @@ const Home = () => {
     <main className="min-h-screen bg-neutral-950 flex flex-col items-center py-10 px-4 sm:px-6">
       <div className="w-full max-w-6xl space-y-8">
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
             {pasteId ? 'Edit Paste' : 'Create Paste'}
           </h1>
           <p className="text-neutral-400">
@@ -85,7 +85,7 @@ const Home = () => {
               <textarea
                 id="content"
                 value={value}
-                className="w-full min-h-[500px] p-4 rounded-lg bg-neutral-800/50 border border-neutral-700 text-neutral-100 placeholder-neutral-500 font-mono text-sm leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all duration-200"
+                className="w-full min-h-125 p-4 rounded-lg bg-neutral-800/50 border border-neutral-700 text-neutral-100 placeholder-neutral-500 font-mono text-sm leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all duration-200"
                 placeholder="// Write your code here..."
                 onChange={(e) => {
                   setValue(e.target.value)

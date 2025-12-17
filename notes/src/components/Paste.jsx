@@ -35,10 +35,10 @@ const Paste = () => {
     <main className="min-h-screen bg-neutral-950 py-10 px-4 sm:px-6">
       <div className="w-full max-w-6xl mx-auto space-y-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
             All Pastes
           </h1>
-          <div className="w-full sm:w-auto min-w-[300px]">
+          <div className="w-full sm:w-auto min-w-75">
             <input
               className="w-full h-10 px-4 rounded-lg bg-neutral-800/50 border border-neutral-700 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all duration-200"
               type="search"
@@ -80,7 +80,7 @@ const Paste = () => {
                         <button onClick={() => handleShare(paste?._id)} className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium text-neutral-300 bg-neutral-800 border border-neutral-700 hover:bg-neutral-700 hover:text-white transition-colors">
                           Share
                         </button>
-                        <button onClick={() => { handleDelete(paste?._id); toast.success('Deleted') }} className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium text-red-400 bg-red-950/30 border border-red-900/30 hover:bg-red-900/50 transition-colors">
+                        <button onClick={() => { handleDelete(paste?._id); }} className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium text-red-400 bg-red-950/30 border border-red-900/30 hover:bg-red-900/50 transition-colors">
                           Delete
                         </button>
                       </div>
